@@ -1,0 +1,18 @@
+#!/usr/bin/env ruby
+require 'webrick'
+include WEBrick
+ 
+dir = "#{Dir::pwd}/public"
+port = (ARGV.first || (12000 + (dir.hash % 1000))).to_i
+ 
+puts "URL: http://#{Socket.gethostname}:#{port}/iphone.html" 
+`echo http://#{Socket.gethostname}:#{port}/iphone.html | pbcopy`
+puts "URL is in paste buffer"
+ 
+s = HTTPServer.new(
+  :Port            => port,
+  :DocumentRoot    => dir
+)
+ 
+trap("INT"){ s.shutdown }
+s.start

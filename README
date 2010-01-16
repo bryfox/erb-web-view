@@ -1,0 +1,38 @@
+# Playground (ErbWebView)
+This is a simple two-part framework to compile a basic WebView-based iphone app from an ERB template.
+
+## Usage
+- Create your erb-driven view. By default, this is /views/iphone.html.erb
+- run ./script/build to generate a static file in /public
+- to preview in Safari, open the file or run ./script/server and paste in the URL
+- to preview in the iphone Simulator:
+-- start XCode
+-- make sure the Simulator is selected in the Overview dropdown
+-- Clean your build (⌘-Shift-K)
+-- Build & Go (⌘-Enter)
+
+## TODO
+- test/fix compress_assets
+- script to rename xcode project
+- Docs on generating a provision, etc.
+
+## Iphone
+Renaming a Target Build (app name):
+1. Go to Targets in Xcode
+2. "Get Info" on your project's target (your current silly development name)
+3. Search for "Product Name" under "Packaging". Change the value of that what you want the new program name is going to be.
+
+## Distributions for testing
+- Distributing IPA files is more reliable (esp. for windows testers)
+- Move the built app into a diretory called Payload, zip that up, and change the zip extension to ipa
+### useful links
+- http://www.innerfence.com/howto/install-iphone-application-ad-hoc-distribution
+- http://furbo.org/2008/08/06/beta-testing-on-iphone-20/
+- http://tuvix.apple.com/iphone/library/documentation/Xcode/Conceptual/iphone_development/145-Publishing_Applications_for_Testing/user_testing.html
+- http://developer.apple.com/iphone/manage/provisioningprofiles/howto.action (login)
+
+# Juicer:
+http://cjohansen.no/en/ruby/juicer_a_css_and_javascript_packaging_tool
+
+# Sprockets:
+http://getsprockets.com/installation_and_usage#sprockets_as_a_ruby_library

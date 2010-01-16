@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>jQTouch &beta; Playground</title>
+        <%= partial :jqtouch_setup %>
+        <%= partial :jqtouch_extensions %>
+        
+        <link rel="stylesheet" href="css/zflow.css" type="text/css" media="screen" charset="utf-8">
+
+        <!--@js-->
+        <script src="js/zflow.js" type="text/javascript" charset="utf-8"></script>
+        <!--@js_end-->
+    </head>
+    <body>
+
+      <div id="home" class="current">
+        <%= toolbar 'A JQTouch Playground', :back => false %>
+        <ul class="rounded">
+          <li class="arrow"><a href="#readme">Readme</a></li>
+          <li class="arrow"><a href="#transition_1">Transitions</a></li>
+          <!-- <li class="arrow"><a href="#zflow">Cover Flow</a></li> -->
+          <li class="arrow"><a href="#jqtouch">JQTouch demos</a></li>
+        </ul>
+        <h2>About Playground</h2>
+        <div class="info">
+          <p>Playground is a simple framework to build and render WebView-based iphone apps from ERB templates</p>
+        </div>
+      </div>
+
+      <%= partial :transitions %>
+      
+      <div id="readme">
+        <%= toolbar 'Readme' %>
+        <%= render_markdown(rio("#{ROOT_DIR}/README").read) %>
+      </div>
+      
+      <div id="zflow">
+        <body class="zflow">
+            <div class="centering portrait">
+                <div id="tray" class="tray"></div>
+            </div>
+        </body>
+        <script type="text/javascript" charset="utf-8">
+          zflow(['img/1.png', 'img/2.png'], '#tray')
+        </script>
+      </div>
+      
+      
+      <%= partial :jqtouch_content %>
+      
+    </body>
+</html>

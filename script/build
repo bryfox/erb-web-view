@@ -1,0 +1,25 @@
+#!/usr/bin/env ruby
+require "#{File.expand_path(File.dirname(__FILE__))}/../config/env.rb"
+
+def build_for(platform, output_filename=platform)
+  e = ERB.new open("#{VIEWS_DIR}/#{output_filename}.html.erb").read
+  static_file = e.result(binding)
+
+  if COMPRESS_ASSETS
+    # Concatenate JS
+    # http://getsprockets.com/installation_and_usage#sprockets_as_a_ruby_library
+    secretary = Sprockets::Secretary.new(
+      :asset_root   => "public",
+      :source_files => Dir.glob("#{PUBLIC_DIR}/js/*").reject { |f| f == 'app.js' }
+    )
+    secretary.concatenation.save_to("#{PUBLIC_DIR}/js/app.js")
+    secretary.install_assets
+    static_file.sub!(/<!--@js-->.+<!--@js_end-->/m, '<script src="js/app.js" type="text/javascript" charset="utf-8"></script>')
+  end
+
+  File.open("#{OUTPUT_DIR}#{output_filename}.html", "w"){|f| f << static_file}
+
+  puts "Build succeeded for #{platform}."
+end
+
+build_for :iphone
